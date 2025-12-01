@@ -79,6 +79,7 @@ int task16(int size) {
     puts("2) Печать массива");
     puts("3) Удалить элемент функци");
     puts("4) Вставить `-999` в массив");
+    puts("5) Выполнение домашнего задания");
 
     full_elements(ptr_array, size);
 
@@ -86,28 +87,64 @@ int task16(int size) {
         puts("Введите действие: ");
         scanf("%d", &choice);
         switch (choice) {
-        case 1:
-            printf("Результат обработки массива: \n");
-            put_elements(calc_elements(ptr_array, size), 1);
-            break;
-        case 2:
-            put_elements(ptr_array, size);
-            break;
-        case 3:
-            printf("Введите индекс для удаления: ");
-            int k;
-            scanf("%d", &k);
+            case 1:
+                printf("Результат обработки массива: \n");
+                put_elements(calc_elements(ptr_array, size), 1);
+                break;
+            case 2:
+                put_elements(ptr_array, size);
+                break;
+            case 3:
+                printf("Введите индекс для удаления: ");
+                int k;
+                scanf("%d", &k);
 
-            double* new_array = delete_k(ptr_array, size, k);
-            ptr_array = new_array;
-            size--;
-            break;
-        case 4:
-            puts("Эллемент вставлен");
-            double* new_array2 = insert(ptr_array, size);
-            ptr_array = new_array2;
-            size += 1;
-            break;
+                double* new_array = delete_k(ptr_array, size, k);
+                ptr_array = new_array;
+                size--;
+                break;
+            case 4:
+                puts("Эллемент вставлен");
+                double* new_array2 = insert(ptr_array, size);
+                ptr_array = new_array2;
+                size += 1;
+                break;
+            case 5: {
+                int nD = 0;
+                int nA = 10 + rand() % 41;
+                int nB = 10 + rand() % 41;
+                int nC = 10 + rand() % 41;
+
+                double* A = (double*)malloc(nA * sizeof(double));
+                double* B = (double*)malloc(nB * sizeof(double));
+                double* C = (double*)malloc(nC * sizeof(double));
+
+                full_elements(A, nA);
+                full_elements(B, nB);
+                full_elements(C, nC);
+
+                printf("Массив A (%d элементов):\n", nA);
+                put_elements(A, nA);
+
+                printf("Массив B (%d элементов):\n", nB);
+                put_elements(B, nB);
+
+                printf("Массив C (%d элементов):\n", nC);
+                put_elements(C, nC);
+
+                double* D = make_new_array(A, nA, B, nB, C, nC, &nD);
+
+                if (D == NULL) {
+                    printf("\nМассив D пуст.\n");
+                }
+                else {
+                    printf("\nМассив D (%d элементов):\n", nD);
+                    put_elements(D, nD);
+                }
+
+                free(D);
+                break;
+            }
         }
     }
 }

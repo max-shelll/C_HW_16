@@ -98,7 +98,7 @@ double* insert(double* ptr_array, int n) {
     return ptr_array;
 }
 
-double* make_new_array(double* A, int nA, double* B, int nB, double* C, int nC) {
+double* make_new_array(double* A, int nA, double* B, int nB, double* C, int nC, int* nD) {
     int maxSize = nA - 1;
     if (nB - 1 < maxSize) maxSize = nB - 1;
     if (nC - 2 < maxSize) maxSize = nC - 2;
@@ -122,6 +122,7 @@ double* make_new_array(double* A, int nA, double* B, int nB, double* C, int nC) 
         D[i - 1] = min;
     }
 
+    *nD = sizeD;
     return D;
 }
 

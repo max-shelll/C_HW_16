@@ -83,10 +83,10 @@ double* insert(double* ptr_array, int n);
  * @param nB размер массива B
  * @param C указатель на массив C
  * @param nC размер массива C
- * @param n размер массива
+ * @param nD размер полученного массива
  * @return указатель на новый массив
  */
-double* make_new_array(double* A, int nA, double* B, int nB, double* C, int nC);
+double* make_new_array(double* A, int nA, double* B, int nB, double* C, int nC, int* nD);
 
 /**
  * Подсчет количество изменений знака
