@@ -33,10 +33,16 @@ int task11(int size) {
     double A = 0;
     double* ptr_array = (double*)malloc(size * sizeof(double));
 
+    // Задание 1. Заполнение массива с консоли
     printf("Введите %d целых чисел (положительных и отрицательных):\n", size);
     for (int i = 0; i < size; i++) 
         scanf("%lf", &ptr_array[i]);
 
+    // Задание 2. Преобразование массива
+    calc_elements(ptr_array, size);
+    put_elements(ptr_array, size);
+
+    // Задание 4. Поиск суммы индексов элементов массива равных заданному числу А
     printf("Введите число A: ");
     scanf("%lf", &A);
 
@@ -61,7 +67,17 @@ int task14(int size) {
     calc_elements(array, size);
     put_elements(array, size);
 
-    // Задание 3. Индивидуальное задание (дз)
+    // Задание 3. Вычисление суммы элементов массива
+    printf("Сумма элементов массива = %lf", sum_elements(array, 0, size));
+
+    // Задание 4. Поиск в массиве значения равного a
+    double a = 0;
+    printf("Введите элемент для поиска: ");
+    scanf("%lf", &a);
+
+    printf("Индекс элемента = %d\n", find_element(array, size, a));
+
+    // Задание 5. Индивидуальное задание (дз)
     return countSignChanges(array, size);
 }
 
