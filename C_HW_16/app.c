@@ -12,15 +12,15 @@ int main() {
 
     puts("Лабораторные работы 11, 14, 16: Работа с массивами ===\n");
 
-    int size;
+    int* size;
     puts("Укажите размер массива");
     scanf("%d", &size);
 
     puts("\nЛабораторная работа 11");
-    printf("Сумма индексов элементов, равных введенному A: %d\n", task11(size));
+    printf("Сумма индексов элементов, равных введенному A: %d\n", task11(*size));
 
     puts("\nЛабораторная работа 14");
-    printf("Количество изменений знака: %d\n", task14(size));
+    printf("Количество изменений знака: %d\n", task14(*size));
 
     puts("\nЛабораторная работа 16");
     task16(size);
@@ -39,7 +39,7 @@ int task11(int size) {
         scanf("%lf", &ptr_array[i]);
 
     // Задание 2. Преобразование массива
-    calc_elements(ptr_array, size);
+    printf("Значение после обработки `calc_elements` = %d", calc_elements(ptr_array, size));
     put_elements(ptr_array, size);
 
     // Задание 4. Поиск суммы индексов элементов массива равных заданному числу А
@@ -63,8 +63,7 @@ int task14(int size) {
     put_elements(array, size);
 
     // Задание 2. Преобразование массива
-
-    calc_elements(array, size);
+    printf("Значение после обработки `calc_elements` = %d", calc_elements(array, size));
     put_elements(array, size);
 
     // Задание 3. Вычисление суммы элементов массива
@@ -81,10 +80,10 @@ int task14(int size) {
     return countSignChanges(array, size);
 }
 
-int task16(int size) {
+int task16(int* size) {
     double* ptr_array;
 
-    ptr_array = (double*)malloc(size * sizeof(double));
+    ptr_array = (double*)malloc(*size * sizeof(double));
     if (ptr_array == NULL) {
         puts("error");
         return -1;
@@ -97,18 +96,17 @@ int task16(int size) {
     puts("4) Вставить `-999` в массив");
     puts("5) Выполнение домашнего задания");
 
-    full_elements(ptr_array, size);
+    full_elements(ptr_array, *size);
 
     while (choice != 0) {
         puts("Введите действие: ");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
-                printf("Результат обработки массива: \n");
-                put_elements(calc_elements(ptr_array, size), 1);
+                printf("Значение после обработки `calc_elements` = %d", calc_elements(ptr_array, size));
                 break;
             case 2:
-                put_elements(ptr_array, size);
+                put_elements(ptr_array, *size);
                 break;
             case 3:
                 printf("Введите индекс для удаления: ");
@@ -117,13 +115,11 @@ int task16(int size) {
 
                 double* new_array = delete_k(ptr_array, size, k);
                 ptr_array = new_array;
-                size--;
                 break;
             case 4:
                 puts("Эллемент вставлен");
                 double* new_array2 = insert(ptr_array, size);
                 ptr_array = new_array2;
-                size += 1;
                 break;
             case 5: {
                 int nD = 0;
@@ -134,19 +130,6 @@ int task16(int size) {
                 double* A = (double*)malloc(nA * sizeof(double));
                 double* B = (double*)malloc(nB * sizeof(double));
                 double* C = (double*)malloc(nC * sizeof(double));
-
-                full_elements(A, nA);
-                full_elements(B, nB);
-                full_elements(C, nC);
-
-                printf("Массив A (%d элементов):\n", nA);
-                put_elements(A, nA);
-
-                printf("Массив B (%d элементов):\n", nB);
-                put_elements(B, nB);
-
-                printf("Массив C (%d элементов):\n", nC);
-                put_elements(C, nC);
 
                 double* D = make_new_array(A, nA, B, nB, C, nC, &nD);
 

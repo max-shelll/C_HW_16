@@ -1,5 +1,6 @@
 ﻿#ifndef ARRAYS_H
 #define ARRAYS_H
+#define EPS 1e-9
 
 /**
  * Получение уникального значения
@@ -28,9 +29,9 @@ int put_elements(double* ptr_array, int n);
  * Обработка элементов массива согласно индивидуальному варианту
  * @param ptr_array указатель на массив
  * @param n размер массива
- * @return указатель на обработанный массив
+ * @return значения после обработки массива
  */
-double* calc_elements(double* ptr_array, int n);
+int calc_elements(double* ptr_array, int n);
 
 /**
  * Вычисление суммы элементов массива в диапазоне [begin, end]
@@ -51,7 +52,8 @@ double sum_elements(double* ptr_array, int begin, int end);
 int find_element(double* ptr_array, int n, double element);
 
 /**
- * Сравнение двух чисел
+ * Проверяет, равны ли два числа с учётом допуска EPS
+ * Сравнение выполняется по условию: |a - b| < EPS
  * @param a первое число
  * @param b второе число
  * @return 1 - элементы равны, 0 - нет
@@ -61,22 +63,22 @@ int are_equal(double a, double b);
 /**
  * Удаление элемента из массива
  * @param ptr_array указатель на массив
- * @param n размер массива
  * @param k индекс удаляемого элемента
+ * @param size указатель на размер массива
  * @return указатель на обработанный массив
  */
-double* delete_k(double* ptr_array, int n, int k);
+double* delete_k(double* ptr_array, int k, int* size);
 
 /**
  * Вставка -999 в массив на рандомную позицию
  * @param ptr_array указатель на массив
- * @param n размер массива
+ * @param size указатель на размер массива
  * @return указатель на обработанный массив
  */
-double* insert(double* ptr_array, int n);
+double* insert(double* ptr_array, int* size);
 
 /**
- * Создание массива согласно индивидуальному варианту 
+ * Формирует новый массив D по правилу: d_i = min(a_{i-1}, b_i, c_{i+1})
  * @param A указатель на массив A
  * @param nA размер массива A
  * @param B указатель на массив B

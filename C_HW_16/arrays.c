@@ -27,16 +27,14 @@ int put_elements(double* ptr_array, int n) {
     return counter;
 }
 
-double* calc_elements(double* ptr_array, int n) {
+int calc_elements(double* ptr_array, int n) {
     int res = 0;
-    double resArray[1];
 
     for (int i = 0; i < n; i += 2) {
         if (ptr_array[i] > 10) res++;
     }
 
-    resArray[0] = res;
-    return resArray;
+    return res;
 }
 
 double sum_elements(double* ptr_array, int begin, int end) {
@@ -60,17 +58,16 @@ int find_element(double* ptr_array, int n, double element) {
 }
 
 int are_equal(double a, double b) {
-    const double EPS = 1e-9;
     return fabs(a - b) < EPS;
 }
 
-double* delete_k(double* ptr_array, int n, int k) {
-    int new_size = n - 1;
+double* delete_k(double* ptr_array, int k, int* size) {
+    int new_size = *size - 1;
     double* new_array = (double*)malloc(new_size * sizeof(double));
 
     if (new_array == NULL) return ptr_array;
 
-    for (int i = 0, j = 0; i < n; i++) {
+    for (int i = 0, j = 0; i < *size; i++) {
         if (i != k) {
             new_array[j] = ptr_array[i];
             j++;
@@ -78,13 +75,14 @@ double* delete_k(double* ptr_array, int n, int k) {
     }
 
     free(ptr_array);
+    *size = new_size;
     return new_array;
 }
 
-double* insert(double* ptr_array, int n) {
-    int randIndex = rand() % n;
+double* insert(double* ptr_array, int* size) {
+    int randIndex = rand() % (*size);
 
-    int new_size = n + 1;
+    int new_size = *size + 1;
     double* new_array = (double*)realloc(ptr_array, new_size * sizeof(double));
     if (new_array == NULL) return ptr_array;
 
@@ -94,7 +92,7 @@ double* insert(double* ptr_array, int n) {
     }
 
     ptr_array[randIndex] = -999;
-    n = new_size;
+    *size = new_size;
     return ptr_array;
 }
 
